@@ -589,7 +589,7 @@ func (h *Handler) handleGetHistoryForKeys(keys []string, channelID string, txid 
 	return nil, fmt.Errorf("incorrect chaincode message %s received. Expecting %s or %s", responseMsg.Type, pb.ChaincodeMessage_RESPONSE, pb.ChaincodeMessage_ERROR)
 }
 
-func (h *Handler) handleGetVersionForKey(key string, start uint64, end uint64, channelID string, txid string) (*pb.QueryResponse, error) {
+func (h *Handler) handleGetVersionsForKey(key string, start uint64, end uint64, channelID string, txid string) (*pb.QueryResponse, error) {
 	// Create the channel on which to communicate the response from validating peer
 	respChan, err := h.createResponseChannel(channelID, txid)
 	if err != nil {
@@ -609,12 +609,12 @@ func (h *Handler) handleGetVersionForKey(key string, start uint64, end uint64, c
 
 	if responseMsg.Type == pb.ChaincodeMessage_RESPONSE {
 		// Success response
-		getVersionForKeyResponse := &pb.QueryResponse{}
-		if err = proto.Unmarshal(responseMsg.Payload, getVersionForKeyResponse); err != nil {
+		getVersionsForKeyResponse := &pb.QueryResponse{}
+		if err = proto.Unmarshal(responseMsg.Payload, getVersionsForKeyResponse); err != nil {
 			return nil, fmt.Errorf("[%s] unmarshal error", shorttxid(responseMsg.Txid))
 		}
 
-		return getVersionForKeyResponse, nil
+		return getVersionsForKeyResponse, nil
 	}
 	if responseMsg.Type == pb.ChaincodeMessage_ERROR {
 		// Error response
