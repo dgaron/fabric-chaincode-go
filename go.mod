@@ -15,4 +15,4 @@ require (
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 )
 
-replace github.com/hyperledger/fabric-protos-go => github.com/dgaron/fabric-protos/bindings/go-apiv1 v0.0.0-20230727193423-d8e41b3df4fc
+replace github.com/hyperledger/fabric-protos-go => github.com/dgaron/fabric-protos/bindings/go-apiv1 v0.0.0-20230728170636-34077e8f7509
